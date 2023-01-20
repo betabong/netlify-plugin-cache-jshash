@@ -1,8 +1,6 @@
-# ⚡ Netlify Plugin: Custom Cache [![npm](https://img.shields.io/npm/v/netlify-plugin-cache?logo=npm&color=red)](https://www.npmjs.com/package/netlify-plugin-cache) ![CI](https://github.com/jakejarvis/netlify-plugin-cache/workflows/CI/badge.svg)
+# ⚡ Netlify Plugin: Cache hashed javascript files [![npm](https://img.shields.io/npm/v/netlify-plugin-cache-jshash?logo=npm&color=red)](https://www.npmjs.com/package/netlify-plugin-cache-jshash) ![CI](https://github.com/betabong/netlify-plugin-cache-jshash/workflows/CI/badge.svg)
 
-A generic cache plugin for saving and restoring files and/or folders between Netlify builds for impressive speed improvements. Worry less about running out of build minutes! ⏰
-
-Essentially, this plugin is a pretty wrapper around [Netlify's native cache utility](https://github.com/netlify/build/blob/master/packages/cache-utils/README.md) — it isn't tied to any specific static site generator (on purpose).
+If you update a website and javascript files have changed, new users will of course have no problems. But what if a user is currently visiting a webpage and requests a new JS module based on the loaded page? Chances are that the module is no more available if you have changed the JS file. This plugin will cache JS files between builds to ease that problem (if you do lots of updates, you might want to take this further and cache modules for a certain duration).
 
 ## 💿 Install
 
@@ -10,10 +8,10 @@ Add the following lines to your `netlify.toml`:
 
 ```toml
 [[plugins]]
-package = "netlify-plugin-cache"
+package = "netlify-plugin-cache-jshash"
   [plugins.inputs]
-  # Optional (but highly recommended). Defaults to [".cache"].
-  paths = ["resources", "_vendor", "folder/file.md"]
+  # Optional (but highly recommended). Defaults to ["dist/**/*.*.js", "build/**/*.*.js"].
+  paths = ["/assets/js/**/*.*.js"]
 ```
 
 This plugin only takes one input named `paths`: an array of files and/or directories relative to your project's root. These files/directories are restored before a build and saved in cache after a build **if it is successful**.
@@ -24,11 +22,11 @@ Read more about plugin configuration at [the official Netlify Plugin docs](https
 
 ## 👩‍💻 Usage
 
-- **Hugo:** Caching the `resources` directory can speed up your build greatly if you [process](https://gohugo.io/content-management/image-processing/) a lot of images, or compile SASS/SCSS via Hugo pipes. You can also cache the `public` directory to avoid completely rebuilding the entire site on each deploy. [More info here.](https://gohugo.io/getting-started/directory-structure/#directory-structure-explained)
-- **Gatsby:** By default, the `.cache` directory holds persistent data between builds. You can also cache the `dist` directory to avoid completely rebuilding the entire site on each deploy. [More info here.](https://www.gatsbyjs.org/docs/build-caching/)
-- **Jekyll:** A caching API was added as of v4. The notoriously slow SSG can become (relatively) faster by caching the `.jekyll-cache` directory. [More info here.](https://jekyllrb.com/tutorials/cache-api/)
-- **Next.js:** The `.next` directory holds the build output. [More info here.](https://nextjs.org/docs/api-reference/next.config.js/setting-a-custom-build-directory)
-- **Anything else:** This is the reason I kept this plugin as generic as possible! Research the caching behavior of your static site generator (and how to customize it if necessary). Feel free to open a PR and list it here as well!
+-   **Hugo:** Caching the `resources` directory can speed up your build greatly if you [process](https://gohugo.io/content-management/image-processing/) a lot of images, or compile SASS/SCSS via Hugo pipes. You can also cache the `public` directory to avoid completely rebuilding the entire site on each deploy. [More info here.](https://gohugo.io/getting-started/directory-structure/#directory-structure-explained)
+-   **Gatsby:** By default, the `.cache` directory holds persistent data between builds. You can also cache the `dist` directory to avoid completely rebuilding the entire site on each deploy. [More info here.](https://www.gatsbyjs.org/docs/build-caching/)
+-   **Jekyll:** A caching API was added as of v4. The notoriously slow SSG can become (relatively) faster by caching the `.jekyll-cache` directory. [More info here.](https://jekyllrb.com/tutorials/cache-api/)
+-   **Next.js:** The `.next` directory holds the build output. [More info here.](https://nextjs.org/docs/api-reference/next.config.js/setting-a-custom-build-directory)
+-   **Anything else:** This is the reason I kept this plugin as generic as possible! Research the caching behavior of your static site generator (and how to customize it if necessary). Feel free to open a PR and list it here as well!
 
 ## 🐛 Debugging
 

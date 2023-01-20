@@ -2,7 +2,7 @@
 [[plugins]]
 package = "@netlify/plugin-local-install-core"
 
-# package would normally equal `netlify-plugin-cache`
+# package would normally equal `netlify-plugin-cache-jshash`
 [[plugins]]
 package = "../"
   [plugins.inputs]

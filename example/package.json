@@ -1,10 +1,10 @@
 {
-  "private": true,
-  "name": "netlify-plugin-cache-example",
-  "version": "1.0.0",
-  "description": "Just a test of netlify-plugin-cache.",
-  "dependencies": {
-    "netlify-plugin-cache": "file:../",
-    "netlify-plugin-debug-cache": "^1.0.3"
-  }
+	"private": true,
+	"name": "netlify-plugin-cache-jshash-example",
+	"version": "1.0.0",
+	"description": "Just a test of netlify-plugin-cache-jshash.",
+	"dependencies": {
+		"netlify-plugin-cache-jshash": "file:../",
+		"netlify-plugin-debug-cache": "^1.0.3"
+	}
 }
